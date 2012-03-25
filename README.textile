@@ -1,0 +1,4 @@
+Deploy cas-openid-client-demo on http://localhost:8080/demoo
+Deploy cas-openid-server-demo on http://localhost:8080/demoo
+
+Call http://localhost:8080/demoo, fill form with http://xxx.localhost:8080/cas/openid/ (xxx.localhost should be added as localhost), log in CAS server (xxx/xxx) and "Successfull authentication" should happened !
