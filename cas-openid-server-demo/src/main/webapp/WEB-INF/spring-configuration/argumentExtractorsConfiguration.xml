@@ -24,7 +24,7 @@
     
  	<util:list id="argumentExtractors">
 		<ref bean="casArgumentExtractor" />
- 		<ref bean="samlArgumentExtractor" />
         <ref bean="openIdArgumentExtractor" />
+ 		<ref bean="samlArgumentExtractor" />
  	</util:list>
 </beans>

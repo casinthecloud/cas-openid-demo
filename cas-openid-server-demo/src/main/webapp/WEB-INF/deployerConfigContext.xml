@@ -16,7 +16,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:sec="http://www.springframework.org/schema/security"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 	<!--
 		| This bean declares our AuthenticationManager.  The CentralAuthenticationService service bean
@@ -45,10 +45,7 @@
 			+-->
 		<property name="credentialsToPrincipalResolvers">
 			<list>
-            
-            
-<bean class="org.jasig.cas.support.openid.authentication.principal.OpenIdCredentialsToPrincipalResolver" />
-
+				<bean class="org.jasig.cas.support.openid.authentication.principal.OpenIdCredentialsToPrincipalResolver" />
 				<!--
 					| UsernamePasswordCredentialsToPrincipalResolver supports the UsernamePasswordCredentials that we use for /login 
 					| by default and produces SimplePrincipal instances conveying the username from the credentials.
@@ -80,10 +77,7 @@
 			+-->
 		<property name="authenticationHandlers">
 			<list>
-            
-            <bean class="org.jasig.cas.support.openid.authentication.handler.support.OpenIdCredentialsAuthenticationHandler"
-   p:ticketRegistry-ref="ticketRegistry" />
-   
+				<bean class="org.jasig.cas.support.openid.authentication.handler.support.OpenIdCredentialsAuthenticationHandler" p:ticketRegistry-ref="ticketRegistry" />
 				<!--
 					| This is the authentication handler that authenticates services by means of callback via SSL, thereby validating
 					| a server side SSL certificate.
@@ -176,5 +170,18 @@
             </property>
         </bean>
 
-    <bean id="auditTrailManager" class="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager" />
+  <bean id="auditTrailManager" class="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager" />
+  
+  <bean id="healthCheckMonitor" class="org.jasig.cas.monitor.HealthCheckMonitor">
+    <property name="monitors">
+      <list>
+        <bean class="org.jasig.cas.monitor.MemoryMonitor"
+            p:freeMemoryWarnThreshold="10" />
+        <bean class="org.jasig.cas.monitor.SessionMonitor"
+            p:ticketRegistry-ref="ticketRegistry"
+            p:serviceTicketCountWarnThreshold="5000"
+            p:sessionCountWarnThreshold="100000" />
+      </list>
+    </property>
+  </bean>
 </beans>
