@@ -55,6 +55,6 @@
 		</plugins>
 	</build>
 	<properties>
-		<cas.version>3.5.0-RC3-SNAPSHOT</cas.version>
+		<cas.version>3.5.0</cas.version>
 	</properties>
 </project>
