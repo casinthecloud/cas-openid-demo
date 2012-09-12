@@ -1,16 +1,22 @@
+h2. What is this project ?
+
 This project *cas-openid-demo* has been created to test the OpenId support in CAS. It's composed of two modules :
-- the *cas-openid-client-demo* module is the OpenId consumer : it's a web app where the user can fill its OpenId identifier to be redirected to and authenticated at the OpenId provider (it's based on Spring MVC and uses the opendid4Java library)
-- the *cas-openid-server-demo* module is the OpenId provider : it's a CAS server customized with OpenId support : https://wiki.jasig.org/display/CASUM/OpenID.
+- the *cas-openid-client-demo* module is the OpenId consumer : it's a web app where the user can fill its OpenId identifier to be authenticated at the OpenId provider (it's based on Spring MVC and uses the opendid4Java library)
+- the *cas-openid-server-demo* module is the OpenId provider : it's a CAS server customized with OpenId support : "https://wiki.jasig.org/display/CASUM/OpenID":https://wiki.jasig.org/display/CASUM/OpenID.
+
+h2. Quick start & test 
 
 To start quickly, build the project :<pre><code>cd cas-openid-demo
-mvn clean install</code></pre>and start web applications with jetty :<pre><code>cd cas-openid-client-demo
+mvn clean install</code></pre>and start the two web applications with jetty :<pre><code>cd cas-openid-client-demo
 mvn jetty:run</code></pre>
 
-*How to test ?* :
-- call the http://localhost:8080/demoo url (consumer)
-- fill the form with http://localhost:8080/cas/openid/leleuj (replace by your username) and click the "Confirm" button (consumer)
-- authenticate at CAS server (leleuj/leleuj) (provider)
-is displayed ! (consumer)
+To test,
+- call the "http://localhost:8080/demoo":http://localhost:8080/demoo url (at consumer)
+- fill the form with _http://localhost:8080/cas/openid/leleuj_ (replace _leleuj_ by your _username_) and click the "Confirm" button (at consumer)
+- authenticate at CAS server (_username_ / _username_, the password is equal to the login) (at provider)
+- be redirected to the original web app where the text "Successfull authentication" is displayed ! (at consumer)
+
+h2. Manual deployment
 
 You can also deploy manually these two web applications in your favorite web applications server :
 - cas-openid-client-demo on http://localhost:8080/demoo
