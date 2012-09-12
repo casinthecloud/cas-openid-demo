@@ -13,7 +13,7 @@ mvn jetty:run</code></pre>
 To test,
 - call the "http://localhost:8080/demoo":http://localhost:8080/demoo url (at consumer)
 - fill the form with _http://localhost:8080/cas/openid/leleuj_ (replace _leleuj_ by your _username_) and click the "Confirm" button (at consumer)
-- authenticate at CAS server (_username_ / _username_, the password is equal to the login) (at provider)
+- authenticate at CAS server ( _username_ / _username_, the password is equal to the login) (at provider)
 - be redirected to the original web app where the text "Successfull authentication" is displayed ! (at consumer)
 
 h2. Manual deployment
