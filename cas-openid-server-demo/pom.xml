@@ -6,9 +6,7 @@
 		<artifactId>cas-openid-demo</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<groupId>org.leleuj</groupId>
 	<artifactId>cas-openid-server-demo</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>CAS OpenId server demo</name>
 	<description>CAS OpenId server demo</description>

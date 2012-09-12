@@ -1,4 +1,17 @@
-Deploy cas-openid-client-demo on http://localhost:8080/demoo
-Deploy cas-openid-server-demo on http://localhost:8080/cas
+This project *cas-openid-demo* has been created to test the OpenId support in CAS. It's composed of two modules :
+- the *cas-openid-client-demo* module is the OpenId consumer : it's a web app where the user can fill its OpenId identifier to be redirected to and authenticated at the OpenId provider (it's based on Spring MVC and uses the opendid4Java library)
+- the *cas-openid-server-demo* module is the OpenId provider : it's a CAS server customized with OpenId support : https://wiki.jasig.org/display/CASUM/OpenID.
 
-Call http://localhost:8080/demoo, fill form with http://localhost:8080/cas/openid/leleuj (replace by your username), log in CAS server (leleuj/leleuj) and "Successfull authentication" should happened !
+To start quickly, build the project :<pre><code>cd cas-openid-demo
+mvn clean install</code></pre>and start web applications with jetty :<pre><code>cd cas-openid-client-demo
+mvn jetty:run</code></pre>
+
+*How to test ?* :
+- call the http://localhost:8080/demoo url (consumer)
+- fill the form with http://localhost:8080/cas/openid/leleuj (replace by your username) and click the "Confirm" button (consumer)
+- authenticate at CAS server (leleuj/leleuj) (provider)
+is displayed ! (consumer)
+
+You can also deploy manually these two web applications in your favorite web applications server :
+- cas-openid-client-demo on http://localhost:8080/demoo
+- cas-openid-server-demo on http://localhost:8080/cas
