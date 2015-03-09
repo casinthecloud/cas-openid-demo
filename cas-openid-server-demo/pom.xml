@@ -45,6 +45,6 @@
 		</plugins>
 	</build>
 	<properties>
-		<cas.version>3.5.3</cas.version>
+		<cas.version>3.5.4-SNAPSHOT</cas.version>
 	</properties>
 </project>
