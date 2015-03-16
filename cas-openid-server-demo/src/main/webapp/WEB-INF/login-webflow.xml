@@ -34,7 +34,7 @@
         <if test="externalContext.requestParameterMap['openid.mode'] ne ''
             &amp;&amp; externalContext.requestParameterMap['openid.mode'] ne null
             &amp;&amp; externalContext.requestParameterMap['openid.mode'] ne 'associate'"
-            then="openIdSingleSignOnAction" else="ticketGrantingTicketExistsCheck" />
+            then="openIdSingleSignOnAction" else="ticketGrantingTicketCheck" />
     </decision-state>
            
     <action-state id="openIdSingleSignOnAction">
