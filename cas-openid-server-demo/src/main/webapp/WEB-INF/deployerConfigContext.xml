@@ -117,7 +117,7 @@
           class="org.jasig.cas.authentication.AcceptUsersAuthenticationHandler">
         <property name="users">
             <map>
-                <entry key="casuser" value="Mellon"/>
+                <entry key="leleuj" value="leleuj"/>
             </map>
         </property>
     </bean>
@@ -172,7 +172,7 @@
 
         <bean class="org.jasig.cas.services.RegexRegisteredService"
               p:id="10000001" p:name="HTTPS and IMAPS" p:description="Allows HTTPS and IMAPS protocols"
-              p:serviceId="^(https|imaps)://.*" p:evaluationOrder="10000001">
+              p:serviceId="^(https?|imaps)://.*" p:evaluationOrder="10000001">
 
         <!--
             <property name="proxyPolicy">
