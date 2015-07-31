@@ -7,7 +7,7 @@ This project *cas-openid-demo* has been created to test the OpenId support in CA
 h2. Quick start & test 
 
 To start quickly, build the project :<pre><code>cd cas-openid-demo
-mvn clean install</code></pre>and start the two web applications with jetty :<pre><code>cd cas-openid-client-demo
+mvn clean package</code></pre>and start the two web applications with jetty :<pre><code>cd cas-openid-client-demo
 mvn jetty:run</code></pre>
 
 To test,

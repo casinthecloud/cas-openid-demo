@@ -23,8 +23,8 @@
 | deployerConfigContext.xml centralizes into one file some of the declarative configuration that
 | all CAS deployers will need to modify.
 |
-| This file declares some of the Spring-managed JavaBeans that make up a CAS deployment.  
-| The beans declared in this file are instantiated at context initialization time by the Spring 
+| This file declares some of the Spring-managed JavaBeans that make up a CAS deployment.
+| The beans declared in this file are instantiated at context initialization time by the Spring
 | ContextLoaderListener declared in web.xml.  It finds this file because this
 | file is among those declared in the context parameter "contextConfigLocation".
 |
@@ -68,12 +68,10 @@
             </map>
         </constructor-arg>
 
-        <!-- Uncomment the metadata populator to allow clearpass to capture and cache the password
-             This switch effectively will turn on clearpass.
+        <!-- Uncomment the metadata populator to capture the password.
         <property name="authenticationMetaDataPopulators">
            <util:list>
-              <bean class="org.jasig.cas.extension.clearpass.CacheCredentialsMetaDataPopulator"
-                    c:credentialCache-ref="encryptedMap" />
+               <bean class="org.jasig.cas.authentication.CacheCredentialsMetaDataPopulator"/>
            </util:list>
         </property>
         -->
@@ -92,7 +90,7 @@
 
     <!-- add -->
     <bean id="openIdHandler" class="org.jasig.cas.support.openid.authentication.handler.support.OpenIdCredentialsAuthenticationHandler" p:ticketRegistry-ref="ticketRegistry" />
-    
+
     <bean id="openIdResolver" class="org.jasig.cas.support.openid.authentication.principal.OpenIdPrincipalResolver" />
     <!-- add -->
 
@@ -131,15 +129,15 @@
        | against a deployer-specific store (e.g. LDAP).
        -->
     <bean id="primaryPrincipalResolver"
-          class="org.jasig.cas.authentication.principal.PersonDirectoryPrincipalResolver" >
-        <property name="attributeRepository" ref="attributeRepository" />
-    </bean>
+          class="org.jasig.cas.authentication.principal.PersonDirectoryPrincipalResolver"
+          p:principalFactory-ref="principalFactory"
+          p:attributeRepository-ref="attributeRepository" />
 
     <!--
     Bean that defines the attributes that a service may return.  This example uses the Stub/Mock version.  A real implementation
     may go against a database or LDAP server.  The id should remain "attributeRepository" though.
     +-->
-    <bean id="attributeRepository" class="org.jasig.services.persondir.support.StubPersonAttributeDao"
+    <bean id="attributeRepository" class="org.jasig.services.persondir.support.NamedStubPersonAttributeDao"
           p:backingMap-ref="attrRepoBackingMap" />
 
     <util:map id="attrRepoBackingMap">
@@ -156,51 +154,10 @@
         </entry>
     </util:map>
 
-    <!-- 
-    Sample, in-memory data store for the ServiceRegistry. A real implementation
-    would probably want to replace this with the JPA-backed ServiceRegistry DAO
-    The name of this bean should remain "serviceRegistryDao".
-    +-->
-    <bean id="serviceRegistryDao" class="org.jasig.cas.services.InMemoryServiceRegistryDaoImpl"
-          p:registeredServices-ref="registeredServicesList" />
+    <bean id="serviceRegistryDao" class="org.jasig.cas.services.JsonServiceRegistryDao"
+          c:configDirectory="${service.registry.config.location:classpath:services}" />
 
-    <util:list id="registeredServicesList">
-        <bean class="org.jasig.cas.services.RegexRegisteredService"
-              p:id="0" p:name="Apereo" p:description="Apereo foundation sample service"
-              p:serviceId="^https://www.apereo.org" p:evaluationOrder="0"
-              p:theme="apereo" />
-
-        <bean class="org.jasig.cas.services.RegexRegisteredService"
-              p:id="10000001" p:name="HTTPS and IMAPS" p:description="Allows HTTPS and IMAPS protocols"
-              p:serviceId="^(https?|imaps)://.*" p:evaluationOrder="10000001">
-
-        <!--
-            <property name="proxyPolicy">
-                <bean class="org.jasig.cas.services.RegexMatchingRegisteredServiceProxyPolicy"
-                      c:pgtUrlPattern="^https://.*" />
-            </property>
-            -->
-
-            <!-- 
-            <property name="attributeReleasePolicy">
-                <bean class="org.jasig.cas.services.ReturnAllowedAttributeReleasePolicy">
-                    <property name="allowedAttributes">
-                        <list>
-                            <value>uid</value>
-                            <value>groupMembership</value>
-                            <value>memberOf</value>
-                        </list>
-                    </property>
-                    <property name="attributeFilter">
-                        <bean class="org.jasig.cas.services.support.RegisteredServiceRegexAttributeFilter" c:regex="^\w{3}$" /> 
-                    </property>
-                </bean>
-            </property>
-            -->
-        </bean>
-    </util:list>
-
-    <bean id="auditTrailManager" class="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager" />
+    <bean id="auditTrailManager" class="org.jasig.inspektr.audit.support.Slf4jLoggingAuditTrailManager" />
 
     <bean id="healthCheckMonitor" class="org.jasig.cas.monitor.HealthCheckMonitor" p:monitors-ref="monitorsList" />
 

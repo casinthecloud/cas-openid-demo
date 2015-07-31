@@ -1,0 +1,8 @@
+{
+  "@class" : "org.jasig.cas.services.RegexRegisteredService",
+  "id" : 10000003,
+  "description" : "This service definition authorized all application urls that support HTTP and IMAP protocols.",
+  "serviceId" : "^(http|imap)://.*",
+  "name": "HTTP and IMAP",
+  "evaluationOrder" : 10000003
+}

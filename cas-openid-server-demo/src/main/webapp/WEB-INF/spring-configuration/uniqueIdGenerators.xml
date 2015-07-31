@@ -31,6 +31,11 @@
         the SAML ticket id generator.
     </description>
 
+    <!--
+    <bean id="samlServiceTicketUniqueIdGenerator" class="org.jasig.cas.support.saml.util.SamlCompliantUniqueTicketIdGenerator"
+        c:sourceId="unique-source-id" />
+    -->
+
     <!-- ID Generators -->
     <bean id="ticketGrantingTicketUniqueIdGenerator" class="org.jasig.cas.util.DefaultUniqueTicketIdGenerator"
           c:maxLength="50" c:suffix="${host.name}" />
@@ -50,9 +55,14 @@
                 value-ref="serviceTicketUniqueIdGenerator" />
         <!-- add -->
         <entry
-            key="org.jasig.cas.support.openid.authentication.principal.OpenIdService"
-            value-ref="serviceTicketUniqueIdGenerator" />
+                key="org.jasig.cas.support.openid.authentication.principal.OpenIdService"
+                value-ref="serviceTicketUniqueIdGenerator" />
         <!-- add -->
+        <!--
+        <entry
+                key="org.jasig.cas.support.saml.authentication.principal.SamlService"
+                value-ref="samlServiceTicketUniqueIdGenerator" />
+        -->
     </util:map>
 
 </beans>
