@@ -51,15 +51,16 @@ public class MainController {
     @RequestMapping("/confirm")
     public String confirm(@RequestParam("userid") String userid, final HttpServletRequest request,
                           final HttpSession session) {
-        logger.debug("userid : {}", userid);
+        logger.debug("userid: {}", userid);
         try {
             List<DiscoveryInformation> discoveries = manager.discover(userid);
             DiscoveryInformation discovered = manager.associate(discoveries);
-            logger.debug("discovered : {}", discovered);
+            logger.debug("discovered: {}", discovered);
+            logger.debug("discovered.version: {}", discovered.getVersion());
             session.setAttribute(DISCOVERED, discovered);
             String openIdCallbackUrl = request.getRequestURL().toString().replaceAll("confirm" + EXTENSION, "")
                                        + OPENID_CALLBACK;
-            logger.debug("openIdCallbackUrl : {}", openIdCallbackUrl);
+            logger.debug("openIdCallbackUrl: {}", openIdCallbackUrl);
             AuthRequest authRequest = manager.authenticate(discovered, openIdCallbackUrl);
             SRegRequest sRegRequest = SRegRequest.createFetchRequest();
             sRegRequest.addAttribute("email", false);
@@ -68,7 +69,7 @@ public class MainController {
             sRegRequest.addAttribute("postcode", false);
             authRequest.addExtension(sRegRequest);
             String openIdUrl = authRequest.getDestinationUrl(true);
-            logger.debug("openIdUrl : {}", openIdUrl);
+            logger.debug("openIdUrl: {}", openIdUrl);
             return "redirect:" + openIdUrl;
         } catch (DiscoveryException e) {
             logger.error("discovery exception", e);
@@ -92,7 +93,7 @@ public class MainController {
         if (queryString != null && queryString.length() > 0) {
             receivingURL.append("?").append(request.getQueryString());
         }
-        logger.debug("receivingURL : {}", receivingURL);
+        logger.debug("receivingURL: {}", receivingURL);
         VerificationResult verification = null;
         try {
             verification = manager.verify(receivingURL.toString(), openidResp, discovered);
@@ -107,10 +108,10 @@ public class MainController {
             return "home";
         }
         
-        logger.debug("verification : {}", verification);
+        logger.debug("verification: {}", verification);
         if (verification != null) {
             Identifier verified = verification.getVerifiedId();
-            logger.debug("verified : {} / {}", verified, verified.getClass());
+            logger.debug("verified: {} / {}", verified, verified.getClass());
             if (verified != null) {
                 return "success";
             }
