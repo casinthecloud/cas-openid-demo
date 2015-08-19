@@ -145,8 +145,9 @@
             class="org.jasig.cas.support.openid.web.OpenIdProviderController"
             p:loginUrl="${server.prefix}/login"/>
 
-    <bean id="openIdSingleSignOnAction" class="org.jasig.cas.support.openid.web.flow.OpenIdSingleSignOnAction"
-          p:centralAuthenticationService-ref="centralAuthenticationService"/>
+    <bean id="openIdSingleSignOnAction" class="org.jasig.cas.support.openid.web.flow.OpenIdSingleSignOnAction">
+        <property name="centralAuthenticationService" ref="centralAuthenticationService" />
+    </bean>
 
     <bean id="handlerMappingOpendId" class="org.jasig.cas.support.openid.web.support.OpenIdPostUrlHandlerMapping">
         <property name="order" value="2"/>

@@ -35,7 +35,9 @@
     -->
 
     <!-- add -->
-    <bean id="openIdArgumentExtractor" class="org.jasig.cas.support.openid.web.support.OpenIdArgumentExtractor" />
+    <bean id="openIdArgumentExtractor" class="org.jasig.cas.support.openid.web.support.OpenIdArgumentExtractor">
+        <property name="openIdPrefixUrl" value="${server.prefix}/openid" />
+    </bean>
     <!-- add -->
 
     <bean

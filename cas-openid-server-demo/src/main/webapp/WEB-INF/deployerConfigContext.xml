@@ -89,7 +89,8 @@
     </bean>
 
     <!-- add -->
-    <bean id="openIdHandler" class="org.jasig.cas.support.openid.authentication.handler.support.OpenIdCredentialsAuthenticationHandler" p:ticketRegistry-ref="ticketRegistry" />
+    <bean id="openIdHandler" class="org.jasig.cas.support.openid.authentication.handler.support.OpenIdCredentialsAuthenticationHandler"
+          p:ticketRegistry-ref="ticketRegistry" />
 
     <bean id="openIdResolver" class="org.jasig.cas.support.openid.authentication.principal.OpenIdPrincipalResolver" />
     <!-- add -->
@@ -116,6 +117,7 @@
         <property name="users">
             <map>
                 <entry key="leleuj" value="leleuj"/>
+                <entry key="jleleu" value="jleleu"/>
             </map>
         </property>
     </bean>
