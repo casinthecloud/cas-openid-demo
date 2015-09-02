@@ -36,11 +36,7 @@ public class MainController {
     private static ConsumerManager manager;
 
     static {
-        try {
-            manager = new ConsumerManager();
-        } catch (ConsumerException e) {
-            throw new RuntimeException(e);
-        }
+        manager = new ConsumerManager();
     }
 
     @RequestMapping("/home")
@@ -62,8 +58,8 @@ public class MainController {
                                        + OPENID_CALLBACK;
             logger.debug("openIdCallbackUrl: {}", openIdCallbackUrl);
             AuthRequest authRequest = manager.authenticate(discovered, openIdCallbackUrl);
-            authRequest.setIdentity("http://specs.openid.net/auth/2.0/identifier_select");
-            authRequest.setClaimed("http://specs.openid.net/auth/2.0/identifier_select");
+            //authRequest.setIdentity("http://specs.openid.net/auth/2.0/identifier_select");
+            //authRequest.setClaimed("http://specs.openid.net/auth/2.0/identifier_select");
             SRegRequest sRegRequest = SRegRequest.createFetchRequest();
             sRegRequest.addAttribute("email", false);
             sRegRequest.addAttribute("fullname", false);
@@ -113,7 +109,7 @@ public class MainController {
         logger.debug("verification: {}", verification);
         if (verification != null) {
             Identifier verified = verification.getVerifiedId();
-            logger.debug("verified: {} / {}", verified);
+            logger.debug("verified: {}", verified);
             if (verified != null) {
                 return "success";
             }
