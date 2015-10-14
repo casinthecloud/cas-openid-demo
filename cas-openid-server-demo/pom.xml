@@ -50,6 +50,6 @@
 		</plugins>
 	</build>
 	<properties>
-		<cas.version>4.1.0</cas.version>
+		<cas.version>4.2.0-SNAPSHOT</cas.version>
 	</properties>
 </project>
